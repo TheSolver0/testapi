@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/index', function () {
+       return view('index');
+    })->name('index');
+
+    Route::get('/index', [ArticleController::class, 'index'])->name('index');
+    Route::get('/create', [ArticleController::class, 'create'])->name('create_article');
+
+
+});
+Route::post('/login', [AuthController::class,'login'])->name('login');
+Route::post('/register', [AuthController::class,'register'])->name('register');
+
+Route::get('/connexion', function (){ return view('login'); })->name('connexion');
+Route::get('/inscription', function (){ return view('register'); })->name('inscription');
+// Route::get('/create', function (){ return view('register'); })->name('create');
+
+
+

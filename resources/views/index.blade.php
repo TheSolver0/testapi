@@ -8,57 +8,34 @@
     <title>TestApi</title>
 </head>
 <body>
-    <h1 style="text-align: center;">
-        Listes des articles
-    </h1>
+    <div class="entete">
+        <h1 style="text-align: center;">
+            Listes des articles
+        </h1>
+        <a href="{{route('create')}}"><button> Ecrire un article ?</button></a>
+    </div>
+
     <div class="container">
+        @forelse ($articles as $article )
         <div class="card">
             <img src="{{asset('images/i.jpg')}}" alt="">
             <p>
-                description de l'article
+                <b>Nom : {{$article->name}}</b>
+                <span>Date de publication : {{$article->created_at}}</span>
+                <b><i>Auteur : {{$article->auteur}}</i></b>
             </p>
         </div>
-        <div class="card">
+        @empty
+            <span style="color:brown;">Aucun article disponibles</span>
+        @endforelse
+        {{-- <div class="card">
             <img src="{{asset('images/i.jpg')}}" alt="">
             <p>
-                description de l'article
+                <b>Article de livre</b>
+                <span>10/03/2024 a 20h</span>
+                <b><i>Luc FOTSO</i></b>
             </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div> <div class="card">
-            <img src="{{asset('images/i.jpg')}}" alt="">
-            <p>
-                description de l'article
-            </p>
-        </div>
+        </div> --}}
     </div>
 </body>
 </html>
