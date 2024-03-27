@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
 });
+
 Route::get(
     uri: 'login',
     action: static fn () =>  \App\Models\User::firstOrFail()->createToken('auth_token')->plainTextToken

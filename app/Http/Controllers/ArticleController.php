@@ -37,7 +37,7 @@ class ArticleController extends Controller
         $article = Article::create([
             'title' => $request->title,
             'content' => $request->content,
-            'author' => $user->id,
+            'users_id' => $user->id,
         ]);
 
         return response()->json(['article' => $article], 201);
