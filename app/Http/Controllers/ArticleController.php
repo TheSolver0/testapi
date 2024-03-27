@@ -12,10 +12,11 @@ class ArticleController extends Controller
     {
         $articles = Article::orderBy('id','desc')->get();
 
-        return view('index',compact('articles'));
+        // return view('index',compact('articles'));
+        return response()->json($articles, 200);;
     }
 
-    public function articlestore()
+    public function createArticle()
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

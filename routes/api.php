@@ -25,16 +25,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
     })->name('index');
 
     Route::get('/index', [ArticleController::class, 'index'])->name('index');
-    Route::get('/create', [ArticleController::class, 'create'])->name('create_article');
+    Route::post('/store', [ArticleController::class, 'createArticle'])->name('create_article');
+    Route::get('/create', function () { return view('create_article');})->name('articlestore');
 
 
 });
-Route::post('/login', [AuthController::class,'login'])->name('login');
-Route::post('/register', [AuthController::class,'register'])->name('register');
+// Route::post('/login', [AuthController::class,'login'])->name('login');
+// Route::post('/register', [AuthController::class,'register'])->name('register');
 
 Route::get('/connexion', function (){ return view('login'); })->name('connexion');
 Route::get('/inscription', function (){ return view('register'); })->name('inscription');
 // Route::get('/create', function (){ return view('register'); })->name('create');
-
+Route::get(
+    uri: 'login',
+    action: static fn () =>  \App\Models\User::firstOrFail()->createToken('auth_token')->plainTextToken
+)->name('login');
 
 

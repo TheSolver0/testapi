@@ -7,7 +7,7 @@
     <title>TestApi</title>
 </head>
 <body>
-    <form action="{{route('articlestore')}}" method="POST">
+    <form action="{{route('create_article')}}" method="POST">
         @method('POST')
         <fieldset>
             <legend>Creation Article</legend>
@@ -16,7 +16,7 @@
             <br>
             <br>
             <button type="Reset">Reset</button>
-            <button type="submit">S'inscire</button>
+            <button type="submit">Enregistrer</button>
         </fieldset>
     </form>
 </body>
