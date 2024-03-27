@@ -18,8 +18,6 @@ class ArticleFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'auteur' => fake()->name(),
-            'path' => 'images/i.jpg',
         ];
     }
 }

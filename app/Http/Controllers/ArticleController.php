@@ -10,21 +10,69 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::orderBy('id','desc')->get();
+        $articles = Article::all();
 
-        // return view('index',compact('articles'));
-        return response()->json($articles, 200);;
+        return response()->json(['article' => $articles], 200);;
+    }
+    public function show($id)
+    {
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json(['message' => 'Article not found'], 404);
+        }
+
+        return response()->json(['article' => $article], 200);
     }
 
-    public function createArticle()
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
         ]);
-        $post = Post::create([
-            'name' => $request->name,
-            'auteur' => $user->id,
+
+        $user = Auth::user();
+
+        $article = Article::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'author' => $user->id,
         ]);
+
+        return response()->json(['article' => $article], 201);
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json(['message' => 'Article not found'], 404);
+        }
+
+        $article->update([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return response()->json(['article' => $article], 200);
+    }
+    public function destroy($id)
+    {
+        $article = Article::find($id);
+
+        if (!$article) {
+            return response()->json(['message' => 'Article not found'], 404);
+        }
+
+        $article->delete();
+
+        return response()->json(['message' => 'Article deleted successfully'], 200);
     }
 
 }
