@@ -32,7 +32,7 @@ class ArticleController extends Controller
             'content' => 'required|string',
         ]);
 
-        $user = Auth::user();
+        $user = auth()->user();
 
         $article = Article::create([
             'title' => $request->title,
